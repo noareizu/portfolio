@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ウタ部</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <% if user_signed_in? && current_user.admin == true %>
+          <%=link_to "ロゴ", root_path %>
+          <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <li>
+              <%= current_user.name %>
+            </li>
+            <li>
+              <p>"ユーザー一覧"</p>
+            </li>
+            <li>
+              <p>"動画一覧"</p>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "link_line" %>
+            </li>
+          </ul>
+        <% elsif user_signed_in? && current_user.admin == false %>
+          <ul class="navbar-nav navbar-right">
+            <li>
+              <%= current_user.name %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "link_line" %>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="navbar-nav navbar-right">
+            <li class= "btn btn-info">
+              <%= link_to "ログイン", new_user_session_path,class: "link_line" %>
+            </li>
+            <li class= "btn btn-info">
+              <%= link_to "新規登録", new_user_registration_path,class: "link_line" %>
+            </li>
+          </ul>
+        <% end %>
+    </div>
+  </header>
+  <%= yield %>
+</body>
+</html>
