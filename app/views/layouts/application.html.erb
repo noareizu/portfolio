@@ -9,40 +9,45 @@
 </head>
 
 <body>
-  <header class="navbar navbar-fixed-top navbar-inverse">
+  <header class="navbar-inverse navbar-fixed-top navbar-inverse">
     <div class="container">
+      <%=link_to "ロゴ", root_path %>
         <% if user_signed_in? && current_user.admin == true %>
-          <%=link_to "ロゴ", root_path %>
           <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
-            <li>
+            <li class="header">
               <%= current_user.name %>
             </li>
-            <li>
+            <li class="header">
               <p>"ユーザー一覧"</p>
             </li>
-            <li>
+            <li class="header">
               <p>"動画一覧"</p>
             </li>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "link_line" %>
+            <li class="header">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
             </li>
           </ul>
         <% elsif user_signed_in? && current_user.admin == false %>
           <ul class="navbar-nav navbar-right">
-            <li>
-              <%= current_user.name %>
+            <li class="header">
+              <%= link_to user_path(current_user),:style => "color: white;" do %>
+                <p><%= current_user.name %></p>
+              <% end %>
             </li>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "link_line" %>
+            <li class="header">
+              <%= link_to "動画投稿", new_article_path,:style => "color: white;" %>
+            </li>
+            <li class="header">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
             </li>
           </ul>
         <% else %>
           <ul class="navbar-nav navbar-right">
-            <li class= "btn btn-info">
-              <%= link_to "ログイン", new_user_session_path,class: "link_line" %>
+            <li class="header">
+              <%= link_to "ログイン", new_user_session_path,:style => "color: white;" %>
             </li>
-            <li class= "btn btn-info">
-              <%= link_to "新規登録", new_user_registration_path,class: "link_line" %>
+            <li class="header">
+              <%= link_to "新規登録", new_user_registration_path(current_user),:style => "color: white;" %>
             </li>
           </ul>
         <% end %>

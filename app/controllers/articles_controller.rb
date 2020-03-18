@@ -5,15 +5,18 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def top
     @articles = Article.all
+    @users = User.all
   end
 
   def index
     @articles = Article.all
+    @users = User.all
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @users = User.all
   end
 
   # GET /articles/new
@@ -23,12 +26,14 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    @users = User.all
   end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @article.user_id = current_user.id
 
     respond_to do |format|
       if @article.save
@@ -73,6 +78,10 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :video)
+      params.require(:article).permit(:title, :video, :mediainfo, :user_id)
+    end
+
+    def user_params
+      params.require(:user).permit(:name)
     end
 end
