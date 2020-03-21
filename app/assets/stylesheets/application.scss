@@ -13,8 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
  ul {
-  padding-top:15px;
+  padding:5px;
   list-style: none;
 }
 
@@ -22,3 +26,11 @@
   color:#ffffff;
   padding:0 20px;
 }
+
+.iine__button{
+    line-height: 42px;
+    font-size: 14px;
+    padding: 0 18px;
+    border-radius: 100px;
+    font-weight: bold;
+ }

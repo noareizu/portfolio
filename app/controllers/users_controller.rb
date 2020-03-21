@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
   	@users = User.all
+    @user = User.find(params[:id])
   end
 
   def show
@@ -8,6 +9,14 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to user_path
   end
 
   private
@@ -16,6 +25,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name, :email, :introduction, :user_image)
     end
 end

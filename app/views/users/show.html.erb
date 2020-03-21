@@ -1,3 +1,5 @@
 <div class="container">
-	
+	<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"100x100") %>
+	<%= @user.name %><br>
+	<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
 </div>

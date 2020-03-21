@@ -12,12 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :タイトル %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :video %>
+    <%= form.label :動画説明 %>
+    <%= form.text_area :mediainfo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :動画ファイル選択 %>
     <%= form.file_field :video %>
   </div>
 

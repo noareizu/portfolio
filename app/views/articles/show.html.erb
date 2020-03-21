@@ -1,11 +1,52 @@
-<p id="notice"><%= notice %></p>
 <div class="container">
-<p>
-  <strong>Title:</strong>
+    <div class="row">
+    <div class="col-sm-12">
+<h3>
   <%= @article.title %>
+</h3>
+
+<p>
+  <%= @article.mediainfo %>
 </p>
 
- <div class="field">
-  <%= video_tag(@article.video, :controls => true, :loop => true, :size => 20*20) %>
+<div class="field">
+  <%= video_tag(@article.video, :controls => true, :loop => true, width: "80%") %>
+</div>
+
+<%= render 'likes/like', article: @article %>
+
+<% if user_signed_in? %>
+	<%= form_with(model: [@article, @comment], remote: true) do |f| %>
+	  <div class="row">
+	      <div class="col-sm-12">
+	          <%= f.text_area :comment, rows:'1', class: "form-control",placeholder: "コメント入力" %><%= f.submit "送信", class: " btn-base-1 mt-20 pull-right" %>
+	      </div>
+	  </div>
+	<% end %>
+<% else %>
+	<p>コメントをする場合、ログインをしてください</p>
+<% end %>
+
+<li class="comments">
+	<% @article.comments.each do |c| %>
+    <div class="comment-body bb">
+        <div class="comment-avatar">
+            <div class="avatar">
+                <%= attachment_image_tag c.user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20" %>
+            </div>
+        </div>
+        <div class="comment-text">
+            <div class="comment-author clearfix">
+                <a href="#" class="link-author"><%= c.user.name %></a>
+                <span class="comment-meta">
+                  <span class="comment-date"><%= c.created_at.strftime('%Y/%m/%d') %></span>
+                </span>
+            </div>
+            <div class="comment-entry"><%= c.comment %></div>
+        </div>
+    </div>
+    <% end %>
+</li>
+</div>
 </div>
 </div>

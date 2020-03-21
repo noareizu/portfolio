@@ -6,27 +6,35 @@ class ArticlesController < ApplicationController
   def top
     @articles = Article.all
     @users = User.all
+    @user = current_user
   end
 
   def index
     @articles = Article.all
     @users = User.all
+    @user = User.find(params[:id])
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
     @users = User.all
+    @user = current_user
+    @article = Article.find(params[:id])
+    @comments = @article.comments
+    @comment = Comment.new
   end
 
   # GET /articles/new
   def new
     @article = Article.new
+    @user = current_user
   end
 
   # GET /articles/1/edit
   def edit
     @users = User.all
+    @user = current_user
   end
 
   # POST /articles
@@ -82,6 +90,6 @@ class ArticlesController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name,:user_image)
     end
 end

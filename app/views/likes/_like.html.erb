@@ -1,0 +1,19 @@
+<div class="like-link" id="like-link-<%= article.id %>">
+  <% if current_user.likes.find_by(article_id: article.id) %>
+  	<li>
+  		<P>マイリスト登録数:<%= @article.likes.count %>
+		  	マイリストから外す
+		    <%= link_to unlike_path(article.id), method: :delete, remote: true do %>
+		        <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+		    <% end %>
+		</P>
+	</li>
+  <% else %>
+  	<li>マイリスト登録数:<%= @article.likes.count %>
+  	マイリストに登録する
+    <%= link_to like_path(article.id), method: :post, remote: true do %>
+        <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: #000000";></span>
+    <% end %>
+	</li>
+  <% end %>
+</div>

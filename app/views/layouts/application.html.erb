@@ -9,12 +9,13 @@
 </head>
 
 <body>
-  <header class="navbar-inverse navbar-fixed-top navbar-inverse">
+  <header class="navbar-fixed-top navbar-inverse">
     <div class="container">
       <%=link_to "ロゴ", root_path %>
         <% if user_signed_in? && current_user.admin == true %>
-          <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
+          <ul class="navbar-nav navbar-right">
             <li class="header">
+              <%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20") %>
               <%= current_user.name %>
             </li>
             <li class="header">
@@ -27,11 +28,13 @@
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
             </li>
           </ul>
+
         <% elsif user_signed_in? && current_user.admin == false %>
           <ul class="navbar-nav navbar-right">
             <li class="header">
               <%= link_to user_path(current_user),:style => "color: white;" do %>
-                <p><%= current_user.name %></p>
+                <%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20") %>
+                <%= current_user.name %>
               <% end %>
             </li>
             <li class="header">
@@ -41,6 +44,7 @@
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
             </li>
           </ul>
+
         <% else %>
           <ul class="navbar-nav navbar-right">
             <li class="header">

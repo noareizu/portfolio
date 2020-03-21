@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'articles#top'
+  post   '/like/:article_id' => 'likes#like',   as: 'like'
+  delete '/like/:article_id' => 'likes#unlike', as: 'unlike'
   resources :users
-  resources :articles
+  resources :articles  do
+  	resource :comments, only: [:create]
+  end
 end
