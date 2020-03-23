@@ -1,0 +1,5 @@
+<% @likes.each do |like| %>
+ <%= link_to article_path(like.article.id) do %>
+  <%= like.article.title %>
+  <% end %>
+<% end %>

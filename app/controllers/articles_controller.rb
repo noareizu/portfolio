@@ -9,10 +9,10 @@ class ArticlesController < ApplicationController
     @user = current_user
   end
 
-  def index
-    @articles = Article.all
+  def search
+    @articles = Article.search(params[:keyword])
     @users = User.all
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   # GET /articles/1

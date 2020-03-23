@@ -1,5 +1,29 @@
 <div class="container">
-	<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"100x100") %>
-	<%= @user.name %><br>
-	<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+	<div>
+		<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"100x100") %>
+		<%= @user.name %><br>
+
+		<% if @user.introduction == nil %>
+			<%= @user.introduction %>
+		<% else %>
+			<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+		<% end %>
+
+		<% if @user == current_user %>
+			<%= link_to "ユーザー情報編集", edit_user_path %>
+		<% end %>
+
+		<%= link_to "マイリスト一覧", likes_path(@user) %>
+	</div>
+	<div>
+		<table>
+		  <tbody>
+		    <% @articles.each do |article| %>
+		      <%= link_to article do %>
+		        <%= article.title %>
+		      <% end %>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
 </div>

@@ -17,14 +17,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
- ul {
-  padding:5px;
-  list-style: none;
-}
-
 .header {
+  padding-top:5px;
+  list-style: none;
   color:#ffffff;
   padding:0 20px;
+}
+
+.main{
+	padding-top:30px;
 }
 
 .iine__button{

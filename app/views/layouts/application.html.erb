@@ -9,54 +9,56 @@
 </head>
 
 <body>
-  <header class="navbar-fixed-top navbar-inverse">
+  <header class="navbar-fixed-top navbar-inverse" >
     <div class="container">
-      <%=link_to "ロゴ", root_path %>
-        <% if user_signed_in? && current_user.admin == true %>
-          <ul class="navbar-nav navbar-right">
-            <li class="header">
-              <%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20") %>
-              <%= current_user.name %>
-            </li>
-            <li class="header">
-              <p>"ユーザー一覧"</p>
-            </li>
-            <li class="header">
-              <p>"動画一覧"</p>
-            </li>
-            <li class="header">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
-            </li>
-          </ul>
+      <% if user_signed_in? && current_user.admin == true %>
+      <%=link_to "TOPへ", root_path, class: "top", :style => "color: white;" %>
+      <ul class="navbar-nav navbar-right">
+        <li class="header">
+          <%= current_user.name %>
+        </li>
+        <li class="header">
+          "ユーザー一覧"
+        </li>
+        <li class="header">
+          "動画一覧"
+        </li>
+        <li class="header">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
+        </li>
+      </ul>
 
-        <% elsif user_signed_in? && current_user.admin == false %>
-          <ul class="navbar-nav navbar-right">
-            <li class="header">
-              <%= link_to user_path(current_user),:style => "color: white;" do %>
-                <%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20") %>
-                <%= current_user.name %>
-              <% end %>
-            </li>
-            <li class="header">
-              <%= link_to "動画投稿", new_article_path,:style => "color: white;" %>
-            </li>
-            <li class="header">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
-            </li>
-          </ul>
+      <% elsif user_signed_in? && current_user.admin == false %>
+      <%=link_to "TOPへ", root_path, class: "top", :style => "color: white;" %>
+      <ul class="navbar-nav navbar-right">
+        <li class="header">
+          <%= link_to user_path(current_user),:style => "color: white;" do %>
+          <%= current_user.name %>
+          <% end %>
+        </li>
+        <li class="header">
+          <%= link_to "動画投稿", new_article_path,:style => "color: white;" %>
+        </li>
+        <li class="header">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
+        </li>
+      </ul>
 
-        <% else %>
-          <ul class="navbar-nav navbar-right">
-            <li class="header">
-              <%= link_to "ログイン", new_user_session_path,:style => "color: white;" %>
-            </li>
-            <li class="header">
-              <%= link_to "新規登録", new_user_registration_path(current_user),:style => "color: white;" %>
-            </li>
-          </ul>
-        <% end %>
+      <% else %>
+      <%=link_to "TOPへ", root_path, class: "top", :style => "color: white;" %>
+      <ul class="navbar-nav navbar-right">
+        <li class="header">
+          <%= link_to "ログイン", new_user_session_path,:style => "color: white;" %>
+        </li>
+        <li class="header">
+          <%= link_to "新規登録", new_user_registration_path(current_user),:style => "color: white;" %>
+        </li>
+      </ul>
+      <% end %>
     </div>
   </header>
-  <%= yield %>
+  <div class="main">
+    <%= yield %>
+  </div>
 </body>
 </html>

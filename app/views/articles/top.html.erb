@@ -1,13 +1,21 @@
 <div class="container">
-<h1>新着動画</h1>
-<table>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= link_to 'Show', article %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<%= link_to root_path do %>
+    <%= image_tag 'ロゴ黒.png', :size =>'100x80' %>
+	<% end %>
+
+  <%= form_with(url: search_articles_path, local: true, method: :get, class: "search-form") do |form| %>
+    <%= form.text_field :keyword, placeholder: "動画タイトルを検索する", class: "search-input" %>
+    <%= form.submit "検索", class: "search-btn" %>
+  <% end %>
+
+  <h1>新着動画</h1>
+  <table>
+    <tbody>
+      <% @articles.each do |article| %>
+        <%= link_to article do %>
+          <%= article.title %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
