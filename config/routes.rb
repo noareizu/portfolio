@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   post   '/like/:article_id' => 'likes#like',   as: 'like'
   delete '/like/:article_id' => 'likes#unlike', as: 'unlike'
   get "users/:id/likes" => "users#likes", as: 'likes'
-  resources :users
-  resources :articles  do
+  resources :users do
+    member do
+        get :following, :followers
+    end
+  end
+  resources :relationships, only: [:create, :destroy]
+
+  resources :articles, shallow: true  do
   	resource :comments, only: [:create]
   	collection do
       get 'search' => 'articles#search'

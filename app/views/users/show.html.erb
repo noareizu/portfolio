@@ -1,26 +1,34 @@
 <div class="container">
 	<div>
-		<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"100x100") %>
-		<%= @user.name %><br>
-
-		<% if @user.introduction == nil %>
-			<%= @user.introduction %>
-		<% else %>
-			<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
-		<% end %>
+		<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:"60x60") %>
+		<%= @user.name %>
 
 		<% if @user == current_user %>
 			<%= link_to "ユーザー情報編集", edit_user_path %>
 		<% end %>
+		<div>
+			<% if @user.introduction == nil %>
+				<%= @user.introduction %>
+			<% else %>
+				<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+			<% end %>
+		</div>
+	</div>
+
+	<div>
+		<%= render "follow_form" %>
 
 		<%= link_to "マイリスト一覧", likes_path(@user) %>
 	</div>
 	<div>
 		<table>
 		  <tbody>
-		    <% @articles.each do |article| %>
+		    <% @article.each do |article| %>
 		      <%= link_to article do %>
 		        <%= article.title %>
+		      <% end %>
+		      <% if article.user == current_user %>
+		      	<%= link_to "動画情報編集", edit_article_path(article) %>
 		      <% end %>
 		    <% end %>
 		  </tbody>

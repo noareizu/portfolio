@@ -1,0 +1,20 @@
+<div id="comment-<%= comment.id %>">
+
+  <div class="comment-body bb">
+    <div class="comment-avatar">
+      <div class="avatar">
+        <%= attachment_image_tag comment.user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20" %>
+      </div>
+    </div>
+    <div class="comment-text">
+      <div class="comment-author clearfix">
+        <a href="#" class="link-author"><%= comment.user.name %></a>
+        <span class="comment-meta">
+          <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+        </span>
+      </div>
+      <div class="comment-entry"><%= safe_join(comment.comment.split("\n"),tag(:br)) %></div>
+    </div>
+  </div>
+
+</div>

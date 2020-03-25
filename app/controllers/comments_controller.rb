@@ -1,13 +1,19 @@
 class CommentsController < ApplicationController
-	def create
-		article = Article.find(params[:article_id])
-	    comment = current_user.comments.new(comment_params)
-	    comment.article_id = article.id
-	    comment.save
-	end
+	before_action :set_comment
+
+  def create
+    @comment = current_user.comments.build(comment_params)
+    @comment.save
+  end
 
 	private
-	def comment_params
-		params.require(:comment).permit(:comment)
-	end
+
+  def set_comment
+    @comment = Comment.find_by(id: params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment)
+          .merge(article_id: params[:article_id])
+  end
 end

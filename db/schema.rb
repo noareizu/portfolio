@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_061828) do
+ActiveRecord::Schema.define(version: 2020_03_24_075852) do
 
   create_table "article_images", force: :cascade do |t|
     t.string "image_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_061828) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "likes_count"
+    t.string "article_image_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -42,6 +43,14 @@ ActiveRecord::Schema.define(version: 2020_03_23_061828) do
     t.integer "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
   end
 
   create_table "user_images", force: :cascade do |t|

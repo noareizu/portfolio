@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-    @articles = @user.articles
+    @articles = Article.all.page(params[:page]).per(16)
+    @article = @user.articles
   end
 
   def edit
@@ -24,9 +25,23 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: @user.id)
   end
 
+  def following
+    #@userがフォローしているユーザー
+    @user  = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    #@userをフォローしているユーザー
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
+  end
+
   private
     def article_params
-      params.require(:article).permit(:title, :video, :mediainfo, :user_id)
+      params.require(:article).permit(:title, :video, :mediainfo, :user_id, :article_image)
     end
 
     def user_params

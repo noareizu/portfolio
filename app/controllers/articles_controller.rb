@@ -4,13 +4,13 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def top
-    @articles = Article.all
+    @articles = Article.all.page(params[:page]).per(16)
     @users = User.all
     @user = current_user
   end
 
   def search
-    @articles = Article.search(params[:keyword])
+    @articles = Article.search(params[:keyword]).page(params[:page]).per(16)
     @users = User.all
     @user = current_user
   end
@@ -19,10 +19,10 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @users = User.all
-    @user = current_user
     @article = Article.find(params[:id])
-    @comments = @article.comments
+    @user = @article.user
     @comment = Comment.new
+    @comments = @article.comments.includes(:user)
   end
 
   # GET /articles/new
@@ -86,7 +86,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :video, :mediainfo, :user_id)
+      params.require(:article).permit(:title, :video, :mediainfo, :user_id, :article_image)
     end
 
     def user_params

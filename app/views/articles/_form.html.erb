@@ -21,12 +21,17 @@
     <%= form.text_area :mediainfo %>
   </div>
 
-  <div class="field">
-    <%= form.label :動画ファイル選択 %>
-    <%= form.file_field :video %>
+  <div>
+    <%= form.label "動画ファイル(mp4)" %>
+    <%= form.file_field :video ,accept:'video/mp4'%>
+  </div>
+
+  <div>
+    <%= form.label :動画サムネイル画像 %>
+    <%= form.attachment_field :article_image %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "動画情報を更新する" %>
   </div>
 <% end %>
