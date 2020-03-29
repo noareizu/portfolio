@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="row">
+		<div class="taikai col-xs-5 col-xs-offset-3 text-center">
+			<br>
+			<br>
+			<br>
+		<p class="font-weight-bold"><span style="font-size:1.6em;">本当に退会しますか？</span></p>
+
+		<%=link_to "退会しない", user_path(current_user),class: "btn btn-info",:style => "color: white;" %>
+		<%=link_to "退会する", user_path(current_user.id),method: :delete,class: "btn btn-danger",:style => "color: white;" %>
+		</div>
+	</div>
+</div>

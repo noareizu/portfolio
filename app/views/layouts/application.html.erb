@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <header class="navbar-fixed-top navbar-inverse">
+  <header class="navbar-top navbar-inverse">
     <div class="container">
       <ul class="navbar-nav">
         <%= link_to root_path do %>
@@ -19,7 +19,7 @@
 
       <ul class="navbar-nav search-area">
         <%= form_with(url: search_articles_path, local: true, method: :get, class: "search-form") do |form| %>
-        <%= form.text_field :keyword, placeholder: "動画タイトルを検索する", class: "search-input",size:"60" %>
+        <%= form.text_field :keyword, placeholder: "動画タイトルを検索する", class: "search-input",size:"70%" %>
         <%= form.submit "検索", class: "search-btn" %>
         <% end %>
       </ul>
@@ -30,7 +30,7 @@
           <%= current_user.name %>
         </li>
         <li class="header">
-          "ユーザー一覧"
+          <%= link_to "ユーザー一覧", users_path,:style => "color: white;" %>
         </li>
         <li class="header">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete,:style => "color: white;" %>
@@ -41,8 +41,11 @@
       <ul class="navbar-nav navbar-right">
         <li class="header">
           <%= link_to user_path(current_user),:style => "color: white;" do %>
-          <%= current_user.name %>
+          <%= attachment_image_tag(current_user, :user_image, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:"24x24") %>
           <% end %>
+        </li>
+        <li class="header">
+          <%= link_to "マイリスト一覧", likes_path(current_user),:style => "color: white;" %>
         </li>
         <li class="header">
           <%= link_to "動画投稿", new_article_path,:style => "color: white;" %>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'articles#top'
+  get 'congfirm' => 'users#confirm'
   post   '/like/:article_id' => 'likes#like',   as: 'like'
   delete '/like/:article_id' => 'likes#unlike', as: 'unlike'
   get "users/:id/likes" => "users#likes", as: 'likes'
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :articles, shallow: true  do
-  	resource :comments, only: [:create]
+  	resource :comments, only: [:create, :destroy]
   	collection do
       get 'search' => 'articles#search'
     end

@@ -3,7 +3,7 @@
   <div class="comment-body bb">
     <div class="comment-avatar">
       <div class="avatar">
-        <%= attachment_image_tag comment.user, :user_image, format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg", size:"20x20" %>
+        <%= attachment_image_tag comment.user, :user_image, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:"20x20" %>
       </div>
     </div>
     <div class="comment-text">
@@ -16,5 +16,5 @@
       <div class="comment-entry"><%= safe_join(comment.comment.split("\n"),tag(:br)) %></div>
     </div>
   </div>
-
+  <br>
 </div>

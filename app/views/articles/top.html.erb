@@ -1,5 +1,4 @@
 <div class="container">
-
   <h1>新着動画</h1>
   <table>
     <tbody>
@@ -16,5 +15,7 @@
       </div>
     </tbody>
   </table>
-  <%= paginate @articles %>
+  <div class="paginate">
+    <%= paginate @articles %>
+  </div>
 </div>

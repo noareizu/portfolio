@@ -26,12 +26,10 @@
 
 .search-area{
   padding-top:20px;
-  padding-left:150px;
-  text-align:center;
 }
 
-.main{
-  padding-top:80px;
+.search-input{
+  width:560px;
 }
 
 a:hover {
@@ -45,3 +43,12 @@ a:hover {
     border-radius: 100px;
     font-weight: bold;
  }
+
+.paginate{
+  text-align:center;
+  font-size: 20px;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: blue;
+}

@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   def index
   	@users = User.all
-    @user = User.find(params[:id])
+    @user = User.page(params[:page]).per(20)
   end
 
   def show
   	@user = User.find(params[:id])
-    @articles = Article.all.page(params[:page]).per(16)
-    @article = @user.articles
+    @articles = Article.all
+    @article = @user.articles.page(params[:page]).per(12)
   end
 
   def edit
@@ -16,13 +16,21 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
+    @user.update!(user_params)
     redirect_to user_path
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user == current_user or @user.admin == false
+      @user.destroy
+    end
+    redirect_to root_path
   end
 
   def likes
     @user = User.find(params[:id])
-    @likes = Like.where(user_id: @user.id)
+    @likes = Like.where(user_id: @user.id).page(params[:page]).per(12)
   end
 
   def following

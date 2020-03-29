@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-xs-9 col-xs-offset-1">
     <h2>新規登録</h2>
+    </div>
 
+    <div class="col-xs-9 col-xs-offset-2">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <table class="table table-bordered">
@@ -10,7 +12,7 @@
         <th class="warning">ユーザーネーム</th>
         <th>
           <div class="field">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name",:size => "50*30" %>
+            <%= f.text_field :name, autofocus: true, placeholder: "1~10文字以内で入力してください", autocomplete: "name",:size => "60*30" %>
           </div>
         </th>
       </tr>
@@ -19,7 +21,7 @@
         <th class="warning">メールアドレス</th>
         <th>
           <div class="field">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",:size => "50*30" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",:size => "60*30" %>
           </div>
         </th>
       </tr>
@@ -28,7 +30,7 @@
         <th class="warning">パスワード</th>
         <th>
           <div class="field">
-            <%= f.password_field :password, autocomplete: "new-password",:size => "50*30" %>
+            <%= f.password_field :password, placeholder: "半角英数６文字以上で入力してください", autocomplete: "new-password",:size => "60*30" %>
           </div>
         </th>
       </tr>
@@ -37,7 +39,7 @@
         <th class="warning">パスワード確認</th>
         <th>
           <div class="field">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password",:size => "50*30" %>
+            <%= f.password_field :password_confirmation, placeholder: "確認のため、もう一度パスワードを入力してください", autocomplete: "new-password",:size => "60*30" %>
           </div>
         </th>
       </tr>

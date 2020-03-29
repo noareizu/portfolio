@@ -1,2 +1,31 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1>会員一覧画面</h1>
+    <div class="col-xs-10 col-xs-offset-1">
+      <table class="table">
+        <thead>
+          <tr class="active">
+            <th>ユーザーネーム</th>
+            <th>メールアドレス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+	          <% if user.admin == false %>
+	          <tr>
+	            <th>
+	              <%= link_to user_path(user.id) do %>
+	              <%= user.name %>
+	              <% end %>
+	            </th>
+	            <th><%= user.email %></th>
+	          </tr>
+	          <% end %>
+	      <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= paginate @user, class: "paginate" %>
+  </div>
+</div>

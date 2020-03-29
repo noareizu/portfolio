@@ -1,0 +1,19 @@
+ja:
+  views:
+    pagination:
+      first: '最初'
+      last: '最後'
+      previous: '前'
+      next: '次'
+      truncate: '...'
+
+ja:
+  activerecord:
+    errors:
+      models:
+        article:
+          attributes:
+            article_image_id:
+              blank: "が空になっています"
+      messages:
+        record_invalid: "${errors}"

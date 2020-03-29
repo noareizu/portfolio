@@ -1,37 +1,41 @@
 <%= form_with(model: article, local: true) do |form| %>
-  <% if article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+<% if article.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-      <ul>
-      <% article.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% article.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :タイトル %>
-    <%= form.text_field :title %>
-  </div>
+<div class="col-xs-8 col-xs-offset-2">
+  <table class="table table-bordered">
+    <tr>
+      <th class="warning"><%= form.label :タイトル %></th>
+      <td><%= form.text_field :title,placeholder: "1~50文字以内で入力してください" %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :動画説明 %>
-    <%= form.text_area :mediainfo %>
-  </div>
+    <tr>
+      <th class="warning"><%= form.label :動画説明 %></th>
+      <td><%= form.text_area :mediainfo,placeholder: "1~500文字以内で入力してください",size:"60x20" %></td>
+    </tr>
 
-  <div>
-    <%= form.label "動画ファイル(mp4)" %>
-    <%= form.file_field :video ,accept:'video/mp4'%>
-  </div>
+    <tr>
+      <th class="warning"><%= form.label "動画ファイル(mp4)" %></th>
+      <td><%= form.file_field :video ,accept:'video/mp4'%></td>
+    </tr>
 
-  <div>
-    <%= form.label :動画サムネイル画像 %>
-    <%= form.attachment_field :article_image %>
-  </div>
+    <tr>
+      <th class="warning"><%= form.label :動画サムネイル画像 %></th>
+      <td><%= form.attachment_field :article_image %></td>
+    </tr>
+  </table>
+</div>
 
-  <div class="actions">
-    <%= form.submit "動画情報を更新する" %>
-  </div>
+<div class="col-xs-7 col-xs-offset-6">
+  <%= form.submit "確定",class: "btn btn-info" %>
+</div>
 <% end %>

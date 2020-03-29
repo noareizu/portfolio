@@ -1,5 +1,17 @@
-<% @likes.each do |like| %>
- <%= link_to article_path(like.article.id) do %>
-  <%= like.article.title %>
-  <% end %>
-<% end %>
+<div class="container">
+	<h1>マイリスト一覧</h1>
+	<div class="row">
+		<% @likes.each do |like| %>
+			<div class="col-md-3">
+			<%= like.article.created_at.strftime('%Y/%m/%d %H:%M') %>投稿<br>
+				<%= link_to article_path(like.article.id) do %>
+				  <%= attachment_image_tag(like.article, :article_image, size: "200x150") %><br>
+				  <%= like.article.title %><br>
+				<% end %><br>
+			</div>
+		<% end %>
+		<div class="paginate">
+			<%= paginate @likes %>
+		</div>
+	</div>
+</div>

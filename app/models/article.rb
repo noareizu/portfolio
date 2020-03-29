@@ -3,9 +3,7 @@ class Article < ApplicationRecord
 	mount_uploader :video, VideoUploader
 	attachment :article_image
 
-	validates :title,    presence: true,
-						 length: { maximum: 50 }
-	validates :video,    presence: true
+	validates :title,    length: { maximum: 50 }
 	validates :mediainfo,	length: { maximum: 500 }
 
 	belongs_to :user

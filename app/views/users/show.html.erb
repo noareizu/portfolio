@@ -1,37 +1,68 @@
 <div class="container">
-	<div>
-		<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:"60x60") %>
-		<%= @user.name %>
+	<h2>ユーザー詳細</h2>
+	<%= attachment_image_tag(@user, :user_image, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:"100x100") %>
+	<div class="user_details">
+		<div style="display:inline-flex">
+		<font size="5"><%= @user.name %></font>
 
-		<% if @user == current_user %>
-			<%= link_to "ユーザー情報編集", edit_user_path %>
+		<tr>
+			<% @user ||= current_user %>
+			<div class="stats">
+			  <a href="<%= following_user_path(@user) %>">
+			    <strong id="following" class="stat">
+			      フォロー：<%= @user.following.count %>
+			    </strong>
+			  </a>
+			  <a href="<%= followers_user_path(@user) %>">
+			    <strong id="followers" class="stat">
+			      フォロワー：<%= @user.followers.count %>
+			    </strong>
+			  </a>
+			</div>
+		</tr>
+
+		<% if @user == current_user && @user.admin == false %>
+			<%= link_to "ユーザー情報編集", edit_user_path,class: "btn btn-outline-secondary" %>
+		<% else %>
+			<%= render "follow_form" %>
 		<% end %>
-		<div>
-			<% if @user.introduction == nil %>
-				<%= @user.introduction %>
-			<% else %>
-				<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
-			<% end %>
+
+		</div>
+
+		<div class="introduction">
+			<table>
+				<tr>
+					<td>
+						<% if @user.introduction == nil %>
+							<%= @user.introduction %>
+						<% else %>
+							<%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+						<% end %>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
-	<div>
-		<%= render "follow_form" %>
-
-		<%= link_to "マイリスト一覧", likes_path(@user) %>
-	</div>
-	<div>
+	<div class="user_article">
+	<h1>投稿一覧</h1>
 		<table>
-		  <tbody>
-		    <% @article.each do |article| %>
-		      <%= link_to article do %>
-		        <%= article.title %>
-		      <% end %>
-		      <% if article.user == current_user %>
-		      	<%= link_to "動画情報編集", edit_article_path(article) %>
-		      <% end %>
-		    <% end %>
-		  </tbody>
+			<tbody>
+				<div class="row">
+					<% @article.each do |article| %>
+					<div class="col-md-3">
+					<%= article.created_at.strftime('%Y/%m/%d %H:%M') %>
+					<% if article.user == current_user %>
+						<%= link_to "編集", edit_article_path(article),class: "btn btn-outline-secondary" %>
+					<% end %><br>
+						<%= link_to article do %>
+							<%= attachment_image_tag(article, :article_image, size: "200x150") %><br>
+							<%= article.title %><br>
+						<% end %><br>
+					</div>
+					<% end %>
+				</div>
+			</tbody>
 		</table>
 	</div>
 </div>
