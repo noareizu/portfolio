@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   def index
-  	@users = User.all
-    @user = User.page(params[:page]).per(20)
+    if  current_user.admin == true
+    	@users = User.all
+      @user = User.page(params[:page]).per(20)
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -25,7 +29,7 @@ class UsersController < ApplicationController
     if @user == current_user or @user.admin == false
       @user.destroy
     end
-    redirect_to root_path
+    redirect_to users_path
   end
 
   def likes
